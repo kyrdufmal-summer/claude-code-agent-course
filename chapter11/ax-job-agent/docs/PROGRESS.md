@@ -17,38 +17,56 @@
   - [x] pip 업그레이드
   - [x] `pandas requests beautifulsoup4 jupyter python-dotenv` 설치
   - [x] Python 버전 확인: **3.13.7**
+  - [x] Claude Code 설치 완료
+  - [x] Claude Code 로그인 완료
+  - [x] `ipykernel` 설치 확인
+  - [x] Jupyter kernel `Python (ax-job-agent)` 등록
+  - [x] `notebooks/ax_job_pipeline.ipynb` 생성
+  - [x] VS Code Notebook에서 `Python (ax-job-agent)` 커널 선택
   - [ ] `where.exe python`으로 현재 Python 경로 확인
-  - [ ] VS Code Python Interpreter가 `.venv`인지 확인
-  - [ ] `notebooks/ax_job_pipeline.ipynb` 생성
   - [ ] Notebook 환경 확인 Cell 실행
+  - [ ] `sys.executable`이 프로젝트 `.venv\Scripts\python.exe`인지 확인
+  - [ ] pandas / requests / BeautifulSoup import 확인
   - [ ] STEP 01 완료 판정
 
 ## 2. 다음 작업
 
-다음 작업은 **STEP 01 개발환경 확인 마무리**입니다.
+다음 작업은 **Notebook에서 STEP 01 환경 확인 Cell 실행**입니다.
 
 ### 바로 실행할 것
 
-PowerShell:
+`notebooks/ax_job_pipeline.ipynb`의 첫 Code Cell에 아래 코드를 입력하고 실행합니다.
 
-```powershell
-where.exe python
+```python
+import sys
+import platform
+
+print("Python:", sys.version)
+print("실행 경로:", sys.executable)
+print("Platform:", platform.platform())
 ```
 
-맨 위 결과가 아래 형태인지 확인합니다.
+### 확인할 결과
+
+특히 `실행 경로`가 아래 형태인지 확인합니다.
 
 ```text
 ...\chapter11\ax-job-agent\.venv\Scripts\python.exe
 ```
 
-그다음:
+이 결과가 맞으면 다음으로 pandas / requests / BeautifulSoup import를 확인합니다.
 
-1. VS Code에서 Python Interpreter가 같은 `.venv`인지 확인
-2. `notebooks/ax_job_pipeline.ipynb` 생성
-3. Python / Platform 확인 Cell 실행
-4. pandas / requests / BeautifulSoup import 확인 Cell 실행
-5. 실제 출력 확인
-6. 이상이 없으면 STEP 01 완료 처리
+```python
+import pandas as pd
+import requests
+from bs4 import BeautifulSoup
+
+print("pandas:", pd.__version__)
+print("requests:", requests.__version__)
+print("BeautifulSoup import: OK")
+```
+
+두 Cell 모두 정상 실행되면 **STEP 01 완료 여부를 판정**합니다.
 
 ## 3. 전체 STEP 체크리스트
 
@@ -80,7 +98,7 @@ where.exe python
 - [ ] `git status` 확인
 - [ ] `.venv` 활성화 여부 확인
 - [ ] 이 파일에서 현재 STEP 확인
-- [ ] `PROJECT_GUIDE.md`에서 해당 STEP 목적 확인
+- [ ] `PROJECT_GUIDE.md` 또는 `STEP_BY_STEP.md`에서 해당 STEP 목적 확인
 - [ ] GPT Web에게 현재 STEP 하나만 계획 요청
 
 권장 명령:
@@ -117,14 +135,23 @@ git status
 완료:
 - Fork
 - Clone
-- 실습 브랜치 생성
-- 프로젝트 폴더 생성
+- 실습 브랜치 `ax-job-agent` 생성
+- `chapter11/ax-job-agent` 프로젝트 폴더 생성
 - `.venv` 생성 및 활성화
 - 기본 패키지 설치
 - Python 3.13.7 확인
-- 프로젝트 운영 가이드 문서 추가
+- 프로젝트 운영 문서 생성
+- Claude Code 설치 및 로그인
+- `ipykernel` 설치
+- `Python (ax-job-agent)` Jupyter kernel 등록
+- `notebooks/ax_job_pipeline.ipynb` 생성
+- VS Code Notebook에서 `Python (ax-job-agent)` 커널 선택
+
+현재 위치:
+- **STEP 01 개발환경 확인**
+- Notebook 환경 확인 Cell 실행 직전
 
 다음:
-- `where.exe python` 확인
-- VS Code Interpreter 확인
-- Notebook 생성 및 환경 검증
+- 첫 Code Cell에서 `sys.version`, `sys.executable`, `platform.platform()` 확인
+- 두 번째 Code Cell에서 pandas / requests / BeautifulSoup import 확인
+- 이상 없으면 STEP 01 완료 판정
